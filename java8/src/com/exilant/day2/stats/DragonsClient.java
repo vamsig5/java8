@@ -1,6 +1,8 @@
 package com.exilant.day2.stats;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,7 +16,14 @@ public class DragonsClient {
 				new Dragons("IceFire","France",13)	
 				).collect(Collectors.toList());
 		//to find number of dragons
-		
+		Map<String,Long> mapdrag=dragons.stream().collect(Collectors.groupingBy(Dragons::getName,Collectors.counting()));
+		System.out.println(mapdrag);
+		Map<String,Integer> sumdrag=dragons.stream()
+				.collect(Collectors.groupingBy(Dragons::getName,
+						Collectors.summingInt(Dragons::getCount)));
+		sumdrag.forEach((k,v)->{
+			System.out.println("Dragon Name"+ k+", "+"Number of Dragons"+v);
+		});
 	}
 
 }
