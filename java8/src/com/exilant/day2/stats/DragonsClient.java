@@ -23,6 +23,11 @@ public class DragonsClient {
 		sumdrag.forEach((k,v)->{
 			System.out.println("Dragon Name"+ k+", "+"Number of Dragons"+v);
 		});
+		
+		//find dragon by country and keep the name of dragon of different countries in list/set
+		Map<String,List<Dragons>> mapbycountry=dragons.stream()
+				.collect(Collectors.groupingBy(Dragons::getCountry,Collectors.toList()));
+		System.out.println(mapbycountry);
 	}
 
 }
